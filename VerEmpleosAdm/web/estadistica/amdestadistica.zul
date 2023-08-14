@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<zk   with="100%"  >
+    <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.estadistica.AdmEstadistica')" class="container-fluid">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group container-fluid" align="start"  >
+            <tabbox  width="100%"  tabscroll="true" >
+                <tabs >
+                    <tab label="${labels.app.estadistica}" sclass="menutabs"/>
+                  
+                </tabs>
+                <tabpanels >
+               
+                    <tabpanel  height="100%"  >
+                        <div class="row" >
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                 LISTA DE LAS ESTADISTICA sasda 
+                                    
+                                 
+                                </div>
+                            </div>
+                        </div>
+                    </tabpanel>
+                    
+                    
+                </tabpanels>
+            </tabbox>    
+        </div>
+    </div>
+
+
+</zk>

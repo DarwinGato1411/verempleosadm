@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<zk  contentStyle="overflow:auto" with="100%"   >
+    <hbox self="@define(content)" apply="org.zkoss.bind.BindComposer" align="center"
+          viewModel="@id('vm') @init('com.ec.controlador.Bienvenido')" width="100%">
+          <image src="/imagenes/post.png" class="centrado-porcentual" width="100%" height="100%"/>
+        
+    </hbox>
+
+
+</zk>

@@ -1,0 +1,81 @@
+<?link rel="stylesheet" type="text/css" href="resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="resources/css/style.css"?>
+<?page title="VerEmpleos" contentType="text/html;charset=UTF-8"?>
+<?script type="text/javascript" src="resources/css/jsboostrap/bootstrap.css"?>
+
+<zk contentStyle="overflow:auto" >
+    <style>
+        * {
+        padding: 3px;
+        margin: 0px;
+        }
+        .z-button {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        color: #FFF;
+        min-height: 24px;
+        border: 1px solid #a9a9a9;
+        -moz-border-radius: 4px;   
+        border-radius: 4px;
+        padding: 3px 12px;
+        line-height: 14px;
+        text-shadow: 0 1px #fff;
+        cursor: pointer;
+        white-space: nowrap;
+        }
+    </style>
+    
+    <div class="container">
+        <div class="row" align="center" style="align-items: center;vertical-align: middle;">
+            
+   
+            <div class=" col-12 col-sm-8 col-md-6 col-lg-4 " >
+                
+            </div>    
+            <div class=" col-12 col-sm-8 col-md-6 col-lg-4 panel panel-info" id="loginWin"    
+                 apply="com.ec.controlador.LoginController" >
+
+                <div class="row" align="center"> 
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <image src="./imagenes/logoVerEmpleos.png" width="70%" />
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <label  class="tituloLogin " >INGRESO AL SISTEMA</label>
+                    </div>
+          
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group ">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 form-group ">
+                        <label  class="glyphicon glyphicon-envelope " ></label>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-10 form-group ">
+                        <textbox id="account" type="text" class="form-control glyphicon glyphicon-envelope" 
+                                 onCreate="self.focus()"
+                                 placeholder="Ingrese su email"   />
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                    <div class="col-12 col-sm-12 col-md-1 col-lg-1 form-group ">
+                        <label  class="glyphicon glyphicon-lock" ></label>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-10 form-group ">
+                        <textbox id="password" type="password" class="form-control glyphicon glyphicon-user"  
+                                 placeholder="Ingrese la constraseña" />      
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12" align="center">
+                    <button id="buttonEntrar" 
+                            class="btn btn-primary btn-block btn-lg " 
+                            style="height:50px;font-size:1em;color:white"   
+                            label="${labels.app.login}">                        
+                    </button>   
+                </div>
+            </div>
+        
+
+        </div>
+    </div>
+    
+</zk>

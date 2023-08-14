@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window  id="windowEmpresa"  position="center" class=" headwindowscol-12 col-sm-12 col-md-6 col-lg-6 "  closable="true"  
+         sizable="true" 
+         apply="org.zkoss.bind.BindComposer" contentStyle="overflow:auto"
+         viewModel="@id('vm') @init('com.ec.empresa.ModalActivaPlan')">
+    
+    <caption label="Activar - desactivar membresia" style="font-weight:bold" /> 
+    <div  class="container-fluid"  >
+        <div  class="row" >         
+            
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                
+                
+                
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >Plan: 
+                    <combobox  
+                        model="@load(vm.listaCatTipoMembresias)"  
+                        selectedItem="@bind(vm.catTipoMembresia)" 
+                        readonly="true" 
+                        width="300px"
+                        class="textoFechaDateBox">
+                        <template name="model">
+                            <comboitem  label="@bind(each.descripcion)"/>
+                        </template>                                      
+                    </combobox>
+                </div>
+                
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <label value="(*) " style="color:red;font-weight:bold"/>Fecha inicio:
+                
+                <datebox 
+
+                    compact="true"  
+                    value="@load(vm.membresiaEmpresa1.fechaInicio)" 
+                    readonly="true" 
+                    buttonVisible="false" 
+                    lenient="true" 
+                    format="dd/MM/yyyy" 
+                    constraint="no empty: Ingrese la fecha "
+                    class="input_date"
+                />
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <label value="(*) " style="color:red;font-weight:bold"/>Fecha caduca:
+                
+                <datebox 
+
+                    compact="true"  
+                    value="@load(vm.membresiaEmpresa1.fechaFin)" 
+                    readonly="true" 
+                    buttonVisible="true" 
+                    lenient="true" 
+                    format="dd/MM/yyyy" 
+                    constraint="no empty: Ingrese la fecha "
+                    class="input_date"
+                />
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group" align="center" >
+                <button  label="${labels.app.guardar}" 
+                         sclass=" glyphicon glyphicon-floppy-disk btn btn btn-primary btn-xs"
+                         onClick="@command('guardar')"
+                         tooltiptext="${labels.app.guardar}"/>
+ 
+
+            </div> 
+        </div>
+   
+    </div>
+    
+                    
+                  
+</window>

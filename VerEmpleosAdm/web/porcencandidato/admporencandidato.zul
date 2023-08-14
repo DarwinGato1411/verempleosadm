@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<zk   with="100%"  >
+    
+    <style>
+        span.z-progressmeter-img {
+        display: -moz-inline-box;
+        display: inline-block;
+        background: #fff repeat-x 0 0;
+        background-color: #624d8c;
+        /* background-image: url(/verempleosadm/zkau/web/d1e1fc84/zul/img/misc/prgmeter.png); */
+        height: 15px;
+        line-height: 0;
+        font-size: 0;
+        }
+    </style>
+    <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.porcentcandidato.AdmPorcentajeCandidato')" class="container-fluid">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group container-fluid" align="start"  >
+            <tabbox  width="100%"  tabscroll="true" >
+                <tabs >
+                    <tab label="${labels.app.estadistica}" sclass="menutabs"/>
+                    <!--<tab label="${labels.app.tipousuario}" sclass="menutabs"/>-->
+                </tabs>
+                <tabpanels >
+               
+                    <tabpanel  height="100%"  >
+                        <div class="row" >                     
+                           
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                            
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="start"  >
+<!--                                    Total candidatos:<label sclass="letraLisbox" 
+                                                            value="@load(vm.totalcandidatos)"  
+                                                            width="100%"/>-->
+                                    <listbox width="99%"
+                                             model="@load(vm.listaDatosVacante)" 
+                                             nonselectableTags=""                                             
+                                             mold="paging" pageSize="20">
+                                                             
+                                        <listhead sizable="false">
+                                            <listheader label="${labels.app.vacantepais}"   width="70%" ></listheader>
+                                            <listheader label="${labels.app.cantidad}"  align="center"    width="10%" ></listheader>                                                                                
+                                            <listheader label="${labels.app.pais}"   width="20%" ></listheader>                                                                                
+                                        </listhead>
+                   
+                
+                
+             
+                                        <template name="model">
+                                            <listitem  > 
+                                       
+                                                <listcell  zclass = "mycss-listcell" >
+                                                    <progressmeter value="@bind(each.porcentaje)" width="110%" 
+                                                                   style="background-color:#624d8c;margin-bottom:5px"
+                                                                   tooltiptext="Porcentaje de candidatos en relacion a la base total"/>
+                                          
+                                                </listcell>  
+                                                <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm">
+                                                    <label sclass="letraLisbox" 
+                                                           value="@bind(each.cantidad)"  
+                                                           width="100%"/>
+                                                </listcell>                    
+                                                <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm">
+                                                    <label sclass="letraLisbox" 
+                                                           value="@bind(each.pais)"  
+                                                           width="100%"/>
+                                                </listcell>                    
+                                            </listitem>
+                                        </template>   
+                       
+                                    </listbox>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="start"  >
+<!--                                    Total candidatos:<label sclass="letraLisbox" 
+                                                             value="@load(vm.totalvacantes)"  
+                                                             width="100%"/>-->
+                                    <listbox width="99%"
+                                             model="@load(vm.listaDatos)" 
+                                             nonselectableTags=""                                             
+                                             mold="paging" pageSize="20">
+                                                             
+                                        <listhead sizable="false">
+                                            <listheader label="${labels.app.candipais}"   width="70%" ></listheader>
+                                            <listheader label="${labels.app.cantidad}"  align="center"    width="10%" ></listheader>                                                                                
+                                            <listheader label="${labels.app.pais}"   width="20%" ></listheader>                                                                                
+                                        </listhead>
+                   
+                
+                
+             
+                                        <template name="model">
+                                            <listitem  > 
+                                       
+                                                <listcell  zclass = "mycss-listcell" >
+                                                    <progressmeter value="@bind(each.porcentaje)" width="110%" 
+                                                                   style="background-color:#624d8c;margin-bottom:5px"
+                                                                   tooltiptext="Porcentaje de vacantes en relacion a la base total"/>
+                                          
+                                                </listcell>  
+                                                <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm">
+                                                    <label sclass="letraLisbox" 
+                                                           value="@bind(each.cantidad)"  
+                                                           width="100%"/>
+                                                </listcell>                    
+                                                <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm">
+                                                    <label sclass="letraLisbox" 
+                                                           value="@bind(each.pais)"  
+                                                           width="100%"/>
+                                                </listcell>                    
+                                            </listitem>
+                                        </template>   
+                       
+                                    </listbox>
+                                    
+                                 
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </tabpanel>                   
+                    
+                </tabpanels>
+            </tabbox>    
+        </div>
+    </div>
+
+
+</zk>

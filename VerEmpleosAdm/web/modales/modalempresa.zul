@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window  id="windowEmpresa"  position="center" class=" headwindowscol-12 col-sm-12 col-md-9 col-lg-9 "  closable="true"  
+         sizable="true" 
+         apply="org.zkoss.bind.BindComposer" contentStyle="overflow:auto"
+         viewModel="@id('vm') @init('com.ec.empresa.ModalEmpresa')">
+    
+    <caption label="${labels.app.empresas}" style="font-weight:bold" /> 
+    <div  class="container-fluid"  >
+        <div  class="row" >         
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3  form-group "  >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Actividad económica de la empresa:
+                
+                    <combobox  model="@load(vm.listaGiro)"  
+                               selectedItem="@bind(vm.catGiroEmpresaSelected)" 
+                               class="form-control"
+                               readonly="true" >
+                        <template name="model">
+                            <comboitem  label="@bind(each.giro)"/>
+                        </template>                                      
+                    </combobox>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Pais:
+                
+                    <combobox  model="@load(vm.listaPais)"  
+                               selectedItem="@bind(vm.catPaisSelected)"                               
+                               class="form-control" 
+                               onSelect="@command('buscarProvincia')"
+                               readonly="true" >
+                        <template name="model">
+                            <comboitem  label="@bind(each.pais)"/>
+                        </template>                                      
+                    </combobox>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Provincia:
+                
+                    <combobox id="idProvincia"
+                              model="@load(vm.listaProvincia)"  
+                              selectedItem="@bind(vm.catEstadoSelected)" 
+                              class="form-control"
+                              readonly="true" >
+                        <template name="model">
+                            <comboitem  label="@bind(each.estado)"/>
+                        </template>                                      
+                    </combobox>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>RUC/ ID/ Cedula Juridica:
+                
+                    <textbox  maxlength="13"                              
+                              value="@bind(vm.empresa.rfc)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Nombre empresa:
+                
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.empresa.nombreEmpresa)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Descripcion:
+                
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.empresa.descripcion)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Razon Social:
+                
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.empresa.razonSocial)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value=" " style="color:red;font-weight:bold"/>Numero de empleados:
+                
+                    <intbox   value="@bind(vm.empresa.cantidadEmpleado)" 
+                              class="form-control" />
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3  form-group "  >
+                
+                
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Direccion:
+                
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.empresa.direccion)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value=" " style="color:red;font-weight:bold"/>Codigo postal:
+                
+                    <textbox   value="@bind(vm.empresa.codigoPostal)" 
+                               class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Ciudad:
+                
+                    <textbox   value="@bind(vm.empresa.ciudad)" 
+                               class="form-control" />
+                </div>
+               
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Telefono primario:
+                
+                    <textbox  maxlength="20" 
+                              value="@bind(vm.empresa.telefonoPrimario)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="" style="color:red;font-weight:bold"/>Telefono secundario:
+                
+                    <textbox  maxlength="20" 
+                              value="@bind(vm.empresa.telefonoSecundario)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Prodcuto/Servicio:
+                
+                    <textbox  maxlength="100" 
+                              value="@bind(vm.empresa.productoServicio)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Participa en la feria:
+                    <checkbox class="badge badge-default   btn-secondary  textoFechaDateBox " 
+                              checked="@bind(vm.empresa.empParticipaFeria)">
+                   
+                    </checkbox>
+                   
+                    
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Tipo Stand: 
+                    <radiogroup 
+                        selectedItem="@bind(vm.tipoStand)"  > 
+                        <space bar="false"  />                     
+                        <radio label="Basico" value="1"/>
+                        <space bar="false"  />   
+                        <radio label="Gold" value="2"/>                          
+                    </radiogroup>
+                   
+                    
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Link WhatsApp:
+                
+                    <textbox  maxlength="100" 
+                              value="@bind(vm.empresa.empWhatsapp)" 
+                              class="form-control" />
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Nombre encargado:
+                
+                    <textbox  maxlength="100" 
+                              value="@bind(vm.empresa.nombreEncargado)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Apellido encargado:
+                
+                    <textbox  maxlength="100" 
+                              value="@bind(vm.empresa.apellidoEncargado)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Email:
+                
+                    <textbox  maxlength="100" 
+                              value="@bind(vm.empresa.emailEmpresa)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Pagina web:
+                
+                    <textbox  maxlength="100" 
+                              value="@bind(vm.empresa.paginaweb)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="" style="color:red;font-weight:bold"/>LinkedIn:
+                
+                    <textbox  maxlength="100" 
+                              value="@bind(vm.empresa.empLinkedIn)" 
+                              class="form-control" />
+                </div>
+                
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="" style="color:red;font-weight:bold"/>Video Feria:
+                
+                    <textbox  maxlength="100" 
+                              value="@bind(vm.empresa.videoFeria)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="" style="color:red;font-weight:bold"/>Logo Feria:
+                
+                    <textbox  maxlength="100" 
+                              value="@bind(vm.empresa.logoFeria)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group " align="center"  height="250px" width="400px" >
+                    <button label="Subir imagen" 
+                            class="btn  btn-primary"
+                            onClick="@command('subirFotografia')"  
+                            tooltiptext="Subir archivo IMAGEN"/> 
+                     <image   content="@bind(vm.empresa.fotoGeneral)" width="400px" height="200px" />
+<!--                    <iframe height="200px" width="500px" id="reportframe" 
+                            
+                            content="@bind(vm.empresa.fotoGeneral)"/>-->
+                        
+                
+                 
+                </div>
+            </div>
+            
+            
+            
+           
+           
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group" align="center" >
+                <button  label="${labels.app.guardar}" 
+                         sclass=" glyphicon glyphicon-floppy-disk btn btn btn-primary btn-xs"
+                         onClick="@command('guardar')"
+                         tooltiptext="${labels.app.guardar}"/>
+ 
+
+            </div> 
+        </div>
+   
+    </div>
+    
+                    
+                  
+</window>

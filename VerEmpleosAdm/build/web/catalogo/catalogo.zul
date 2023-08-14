@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<zk   with="100%"  >
+    <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.catalogo.AdmCatalogo')" class="container-fluid">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group container-fluid" align="start"  >
+            <tabbox  width="100%"  tabscroll="true" >
+                <tabs >
+                    <tab label="${labels.app.giro}" sclass="menutabs"/>
+                    <tab label="Tipo de moneda" sclass="menutabs"/>
+                    <tab label="Pais - Estado" sclass="menutabs"/>
+                   
+                </tabs>
+                <tabpanels >
+               
+                    <tabpanel  height="100%"  >
+                        <div class="row" >                     
+                            <div class=" col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <div class="col-6 col-sm-6 col-md-1 col-lg-1 " align="start" style="margin-bottom: 10px" >
+                                    <button label="${labels.app.agregar}"
+                                            class="btn btn-success btn-xs mycss-listcell glyphicon glyphicon-plus"                                                           
+                                            onClick="@command('crearRegistro')" 
+                                            tooltiptext="${labels.app.agregar}"/> 
+                                        
+                                </div>
+                                
+                                <div class="input-group col-12 col-sm-12 col-md-11 col-lg-11 " align="end" style="margin-bottom: 10px" >
+                                    <div class=" col-12 col-sm-12 col-md-9 col-lg-9 " > 
+                                        <label value=""></label>
+                                    </div>
+                                    <div class="input-group col-12 col-sm-12 col-md-3 col-lg-3 "  >                                  
+                                        <textbox   class=" form-control form-control-sm"
+                                                   style="font-size:10px;background-color:trasnsparent;
+                                                 font-weight:bold;height:25px"
+                                                   width="80%"
+                                                   placeholder="Buscar"
+                                                   value="@bind(vm.buscar)" 
+                                                   onChange="self.setValue(self.getValue().toUpperCase());"                                                  
+                                                   onOK="@command('buscarGiro')" />
+                        
+                                       
+                                        <button   style="font-size:10px;background-color:trasnsparent;font-weight:bold"
+                                                  onClick="@command('buscarGiro')"  
+                                                  tooltiptext="Buscar empresas"
+                                                  class="glyphicon glyphicon-search btn btn-outline-primary btn  btn-primary btn-sm "/>
+                                    </div>
+                                </div>
+                               
+                                        
+                                    
+                                    
+                            </div>
+                             
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <listbox width="99%"
+                                         model="@load(vm.listaDatos)" 
+                                         nonselectableTags=""                                             
+                                         mold="paging" pageSize="20">
+                                                             
+                                    <listhead sizable="false">
+                                        <listheader label="${labels.app.giro}"  sort="auto(giro)"   width="95%" ></listheader>                                       
+                                        <listheader label=""  align="center" width="5%"></listheader>                                                                                   
+                                    </listhead>
+                   
+                
+                                    <template name="model">
+                                        <listitem  > 
+                                       
+                                            <listcell  zclass = "mycss-listcell" >
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.giro)"  
+                                                       width="100%"/>
+                                          
+                                            </listcell>  
+                                           
+                                            <listcell  zclass = "mycss-listcell" style="background-color:#7fa9d2">
+                                                <button 
+                                                    class="btn btn-primary btn-xs mycss-listcell glyphicon glyphicon-pencil"                                                           
+                                                    onClick="@command('modificaRegistro',valor=each)" 
+                                                    tooltiptext="${labels.app.editar}"/>
+                                            </listcell>                                         
+                                        </listitem>
+                                    </template>   
+                       
+                                </listbox>
+                                    
+                                 
+                            </div>
+                            
+                        </div>
+                    </tabpanel>
+                    <tabpanel  height="100%"  >
+                        <div class="row" >                     
+                            <div class=" col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <div class="col-6 col-sm-6 col-md-1 col-lg-1 " align="start" style="margin-bottom: 10px" >
+                                    <button label="${labels.app.agregar}"
+                                            class="btn btn-success btn-xs mycss-listcell glyphicon glyphicon-plus"                                                           
+                                            onClick="@command('crearMoneda')" 
+                                            tooltiptext="${labels.app.agregar}"/> 
+                                        
+                                </div>
+                                
+                                <div class="input-group col-12 col-sm-12 col-md-11 col-lg-11 " align="end" style="margin-bottom: 10px" >
+                                    <div class=" col-12 col-sm-12 col-md-9 col-lg-9 " > 
+                                        <label value=""></label>
+                                    </div>
+                                    <div class="input-group col-12 col-sm-12 col-md-3 col-lg-3 "  >                                  
+                                        <textbox   class=" form-control form-control-sm"
+                                                   style="font-size:10px;background-color:trasnsparent;
+                                                 font-weight:bold;height:25px"
+                                                   width="80%"
+                                                   placeholder="Buscar"
+                                                   value="@bind(vm.buscarMoneda)" 
+                                                   onChange="self.setValue(self.getValue().toUpperCase());"                                                  
+                                                   onOK="@command('buscarTipoMoneda')" />
+                        
+                                       
+                                        <button   style="font-size:10px;background-color:trasnsparent;font-weight:bold"
+                                                  onClick="@command('buscarTipoMoneda')"  
+                                                  tooltiptext="Buscar Tipo de Moneda"
+                                                  class="glyphicon glyphicon-search btn btn-outline-primary btn  btn-primary btn-sm "/>
+                                    </div>
+                                </div>
+                               
+                                        
+                                    
+                                    
+                            </div>
+                             
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <listbox width="99%"
+                                         model="@load(vm.listaDatosMoneda)" 
+                                         nonselectableTags=""                                             
+                                         mold="paging" pageSize="20">
+                                                             
+                                    <listhead sizable="false">
+                                        <listheader label="${labels.app.Moneda}"  sort="auto(moneda)"   width="95%" ></listheader>                                       
+                                        <listheader label=""  align="center" width="5%"></listheader>                                                                                   
+                                    </listhead>
+                   
+                
+                                    <template name="model">
+                                        <listitem  > 
+                                       
+                                            <listcell  zclass = "mycss-listcell" >
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.moneda)"  
+                                                       width="100%"/>
+                                          
+                                            </listcell>  
+                                           
+                                            <listcell  zclass = "mycss-listcell" style="background-color:#7fa9d2">
+                                                <button 
+                                                    class="btn btn-primary btn-xs mycss-listcell glyphicon glyphicon-pencil"                                                           
+                                                    onClick="@command('modificarMoneda',valor=each)" 
+                                                    tooltiptext="${labels.app.editar}"/>
+                                            </listcell>                                         
+                                        </listitem>
+                                    </template>   
+                       
+                                </listbox>
+                                    
+                                 
+                            </div>
+                            
+                        </div>
+                    </tabpanel>
+                    <tabpanel  height="100%"  >
+                        <!--Panel Para País-->
+                        <div class="row col-12 col-sm-12 col-md-6 col-lg-6" >                     
+                            <div class=" col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <div class="col-6 col-sm-6 col-md-3 col-lg-3 " align="start" style="margin-bottom: 10px" >
+                                    <button label="${labels.app.agregar}"
+                                            class="btn btn-success btn-xs mycss-listcell glyphicon glyphicon-plus"                                                           
+                                            onClick="@command('crearPais')" 
+                                            tooltiptext="${labels.app.agregar}"/> 
+                                        
+                                </div>
+                                
+                                <div class="input-group col-12 col-sm-12 col-md-9 col-lg-9 " align="end" style="margin-bottom: 10px" >
+                                    <div class=" col-12 col-sm-12 col-md-6 col-lg-6 " > 
+                                        <label value=""></label>
+                                    </div>
+                                    <div class="input-group col-12 col-sm-12 col-md-6 col-lg-6 "  >                                  
+                                        <textbox   class=" form-control form-control-sm"
+                                                   style="font-size:10px;background-color:trasnsparent;
+                                                 font-weight:bold;height:25px"
+                                                   width="80%"
+                                                   placeholder="Buscar"
+                                                   value="@bind(vm.buscarPais)" 
+                                                   onChange="self.setValue(self.getValue().toUpperCase());"                                                  
+                                                   onOK="@command('buscarPaisVer')" />
+                        
+                                       
+                                        <button   style="font-size:10px;background-color:trasnsparent;font-weight:bold"
+                                                  onClick="@command('buscarPaisVer')"  
+                                                  tooltiptext="Buscar Pais"
+                                                  class="glyphicon glyphicon-search btn btn-outline-primary btn  btn-primary btn-sm "/>
+                                    </div>
+                                </div>
+                               
+                                        
+                                    
+                                    
+                            </div>
+                             
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <listbox width="99%"
+                                         model="@load(vm.listaPaisModel)" 
+                                         nonselectableTags=""  
+                                         onSelect="@command('seleccionarRegistros')" 
+                                         checkmark="true" multiple="false"                                           
+                                         mold="paging" pageSize="20">
+                                                             
+                                    <listhead sizable="false">
+                                        <listheader label=""  sort="auto(pais)"   width="40px" ></listheader>                                       
+                                        <listheader label="${labels.app.Pais}"  sort="auto(pais)"   width="95%" ></listheader>                                       
+                                        <listheader label=""  align="center" width="5%"></listheader>                                                                                   
+                                    </listhead>
+                   
+                
+                                    <template name="model">
+                                        <listitem  > 
+                                            <listcell   ></listcell>
+                                       
+                                            <listcell  zclass = "mycss-listcell" >
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.pais)"  
+                                                       width="100%"/>
+                                          
+                                            </listcell>  
+                                           
+                                            <listcell  zclass = "mycss-listcell" style="background-color:#7fa9d2">
+                                                <button 
+                                                    class="btn btn-primary btn-xs mycss-listcell glyphicon glyphicon-pencil"                                                           
+                                                    onClick="@command('modificarPais',valor=each)" 
+                                                    tooltiptext="${labels.app.editar}"/>
+                                            </listcell>                                         
+                                        </listitem>
+                                    </template>   
+                       
+                                </listbox>
+                                    
+                                 
+                            </div>
+                            
+                        </div>
+                        <!--Panel Para Provinica - Estado-->
+                        <div class="row col-12 col-sm-12 col-md-6 col-lg-6" >                     
+                            <div class=" col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <div class="col-6 col-sm-6 col-md-3 col-lg-3 " align="start" style="margin-bottom: 10px" >
+                                    <button label="${labels.app.agregar}"
+                                            class="btn btn-success btn-xs mycss-listcell glyphicon glyphicon-plus"                                                           
+                                            onClick="@command('crearProvincia')" 
+                                            tooltiptext="${labels.app.agregar}"/> 
+                                        
+                                </div>
+                                
+                                <div class="input-group col-12 col-sm-12 col-md-9 col-lg-9 " align="end" style="margin-bottom: 10px" >
+                                    <div class=" col-12 col-sm-12 col-md-6 col-lg-6 " > 
+                                        <label value=""></label>
+                                    </div>
+                                    <div class="input-group col-12 col-sm-12 col-md-6 col-lg-6 "  >                                  
+                                        <textbox   class=" form-control form-control-sm"
+                                                   style="font-size:10px;background-color:trasnsparent;
+                                                          font-weight:bold;height:25px"
+                                                   width="80%"
+                                                   placeholder="Buscar"
+                                                   value="@bind(vm.buscarProvincia)" 
+                                                   onChange="self.setValue(self.getValue().toUpperCase());"                                                  
+                                                   onOK="@command('buscarProvinciaVer')" />
+                        
+                                       
+                                        <button   style="font-size:10px;background-color:trasnsparent;font-weight:bold"
+                                                  onClick="@command('buscarProvinciaVer')"  
+                                                  tooltiptext="Buscar Provincia"
+                                                  class="glyphicon glyphicon-search btn btn-outline-primary btn  btn-primary btn-sm "/>
+                                    </div>
+                                </div>
+                               
+                                        
+                                    
+                                    
+                            </div>
+                             
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <listbox width="99%"
+                                         model="@load(vm.listaDatosProvin)" 
+                                         nonselectableTags=""                                             
+                                         mold="paging" pageSize="20">
+                                                             
+                                    <listhead sizable="false">
+                                        <listheader label="${labels.app.Provincia}"  sort="auto(Provincia)"   width="95%" ></listheader>                                       
+                                        <listheader label=""  align="center" width="5%"></listheader>                                                                                   
+                                    </listhead>
+                   
+                
+                                    <template name="model">
+                                        <listitem  > 
+                                       
+                                            <listcell  zclass = "mycss-listcell" >
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.estado)"  
+                                                       width="100%"/>
+                                          
+                                            </listcell>  
+                                           
+                                            <listcell  zclass = "mycss-listcell" style="background-color:#7fa9d2">
+                                                <button 
+                                                    class="btn btn-primary btn-xs mycss-listcell glyphicon glyphicon-pencil"                                                           
+                                                    onClick="@command('modificarProvincia',valor=each)" 
+                                                    tooltiptext="${labels.app.editar}"/>
+                                            </listcell>                                         
+                                        </listitem>
+                                    </template>   
+                       
+                                </listbox>
+                                    
+                                 
+                            </div>
+                            
+                        </div>
+                    </tabpanel>
+                    
+                    
+                </tabpanels>
+            </tabbox>    
+        </div>
+    </div>
+
+
+</zk>

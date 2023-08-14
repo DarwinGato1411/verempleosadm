@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<zk   with="100%"  >
+    <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.empresa.AdmEmpresa')" class="container-fluid">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group container-fluid" align="start"  >
+            <tabbox  width="100%"  tabscroll="true" >
+                <tabs >
+                    <tab label="${labels.app.empresas}" sclass="menutabs"/>
+                </tabs>
+                <tabpanels >
+               
+                    <tabpanel  height="100%"  >
+                        <div class="row" >                     
+                            <div class=" col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <div class="col-6 col-sm-6 col-md-1 col-lg-1 " align="start" style="margin-bottom: 10px" >
+                                    <button label="${labels.app.agregar}"
+                                            class="btn btn-success btn-xs mycss-listcell glyphicon glyphicon-plus"                                                           
+                                            onClick="@command('crearRegistro')" 
+                                            tooltiptext="${labels.app.agregar}"/> 
+                                        
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-1 col-lg-1 " align="start" style="margin-bottom: 10px" >
+                                    <button label="${labels.app.descargar}"
+                                            class="btn btn-success btn-xs mycss-listcell glyphicon glyphicon-download-alt"                                                           
+                                            onClick="@command('exportListboxToExcel')" 
+                                            tooltiptext="${labels.app.agregar}"/> 
+                                        
+                                </div>
+                                <div class="input-group col-12 col-sm-12 col-md-10 col-lg-10 " align="end" style="margin-bottom: 10px" >
+                                    <div class=" col-12 col-sm-12 col-md-9 col-lg-9 " > 
+                                        <label value=""></label>
+                                    </div>
+                                    <div class="input-group col-12 col-sm-12 col-md-3 col-lg-3 "  >                                  
+                                        <textbox   class=" form-control form-control-sm"
+                                                 style="font-size:10px;background-color:trasnsparent;
+                                                        font-weight:bold;height:25px"
+                                                 width="80%"
+                                                 placeholder="Buscar"
+                                                 value="@bind(vm.buscar)" 
+                                                 onChange="self.setValue(self.getValue().toUpperCase());"                                                  
+                                                 onOK="@command('buscarEmpresas')" />
+                        
+                                       
+                                        <button   style="font-size:10px;background-color:trasnsparent;font-weight:bold"
+                                                onClick="@command('buscarEmpresas')"  
+                                                tooltiptext="Buscar empresas"
+                                                class="glyphicon glyphicon-search btn btn-outline-primary btn  btn-primary btn-sm "/>
+                                    </div>
+                                </div>
+                               
+                                        
+                                    
+                                    
+                            </div>
+                             
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                                <listbox width="99%"
+                                         model="@load(vm.listaDatos)" 
+                                         nonselectableTags=""                                             
+                                         mold="paging" pageSize="20">
+                                                             
+                                    <listhead sizable="false">
+                                        <listheader label="${labels.app.nombreempresa}"  sort="auto(nombreEmpresa)"   width="15%" ></listheader>
+                                        <listheader label="${labels.app.razonsocial}"  sort="auto(razonSocial)"   width="15%" ></listheader>                                        
+                                        <listheader label="${labels.app.telefonoprim}" class="hidden-xs hidden-sm "  width="10%"></listheader>
+                                        <listheader label="${labels.app.telefonosec}" class="hidden-xs hidden-sm "   width="10%"></listheader>
+                                        <listheader label="${labels.app.nombreencargado}" class="hidden-xs hidden-sm " sort="auto(nombreEncargado)"  width="15%"></listheader>
+                                        <listheader label="${labels.app.apellidoencargado}" class="hidden-xs hidden-sm " sort="auto(apellidoEncargado)" width="15%"></listheader>
+                                        <listheader label="${labels.app.email}"  sort="auto(emailEmpresa)"  width="15%"></listheader>                               
+                                        <listheader label="${labels.app.participaferia}"  sort="auto(empParticipaFeria)"  align="center" width="5%"></listheader>                               
+                                        <listheader label="${labels.app.pais}"  sort="auto(empParticipaFeria)"  align="center" width="10%"></listheader>                               
+                                        <listheader label="${labels.app.ciudad}"  sort="auto(empParticipaFeria)"  align="center" width="10%"></listheader>                               
+                                        <listheader label=""  align="center" width="5%"></listheader>                                            
+                                        <listheader label=""  align="center" width="5%"></listheader>                                            
+                                        <!--<listheader label=""  align="center" width="5%"></listheader>-->                                            
+                                    </listhead>
+                   
+                
+                                    <template name="model">
+                                        <listitem  > 
+                                       
+                                            <listcell  zclass = "mycss-listcell" >
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.nombreEmpresa)"  
+                                                       width="100%"/>
+                                          
+                                            </listcell>  
+                                            <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm">
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.razonSocial)"  
+                                                       width="100%"/>
+                                            </listcell>  
+                                            <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm ">
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.telefonoPrimario)"  
+                                                       width="100%"/>
+                                            </listcell>  
+                                            <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm ">
+                                             
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.telefonoSecundario)" 
+                                                       width="100%"/>
+                                            </listcell>  
+                                            <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm ">
+                                             
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.nombreEncargado)" 
+                                                       width="100%"/>
+                                            </listcell>  
+                                                     
+                                            <listcell  zclass = "mycss-listcell" >
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.apellidoEncargado)" 
+                                                       width="100%"/>
+                                                    
+                                            </listcell> 
+                                            <listcell  zclass = "mycss-listcell" >
+                                                <label sclass="letraLisbox" 
+                                                       value="@bind(each.emailEmpresa)" 
+                                                       width="100%"/>
+                                                    
+                                            </listcell> 
+                                            <listcell  zclass = "mycss-listcell" >
+                                                <checkbox class="badge badge-default   btn-secondary  textoFechaDateBox " 
+                                                          onCheck="@command('activaFeria',valor=each)"                                                  
+                                                          checked="@bind(each.empParticipaFeria)">
+                   
+                                                </checkbox>
+                                                    
+                                            </listcell> 
+                                            <listcell  zclass = "mycss-listcell" >
+                                                 <label sclass="letraLisbox" 
+                                                       value="@bind(each.paistext)" 
+                                                       width="100%"/>
+                                                    
+                                            </listcell> 
+                                            <listcell  zclass = "mycss-listcell" >
+                                                 <label sclass="letraLisbox" 
+                                                       value="@bind(each.ciudad)" 
+                                                       width="100%"/>
+                                                    
+                                            </listcell> 
+                                            <listcell  zclass = "mycss-listcell" style="background-color:#7fa9d2">
+                                                <button 
+                                                    class="btn btn-primary btn-xs mycss-listcell glyphicon glyphicon-pencil"                                                           
+                                                    onClick="@command('modificaRegistro',valor=each)" 
+                                                    tooltiptext="${labels.app.editar}"/>
+                                            </listcell>
+                                            <listcell  zclass = "mycss-listcell" style="background-color:#7fa9d2">
+                                                <button 
+                                                    class="btn btn-primary btn-xs mycss-listcell glyphicon glyphicon-star"                                                           
+                                                    onClick="@command('activarPlan',valor=each)" 
+                                                    tooltiptext="Activar / Desactivar plan"/>
+                                            </listcell>
+<!--                                            <listcell  zclass = "mycss-listcell" style="background-color:#7fa9d2">
+                                                <button 
+                                                    class="btn btn-danger btn-xs mycss-listcell glyphicon glyphicon-trash"                                                           
+                                                    onClick="@command('abrirJuego',valor=each)" 
+                                                    tooltiptext="${labels.app.eliminar}"/>
+                                                    
+                                            </listcell> -->
+                                           
+                                          
+
+                                        </listitem>
+                                    </template>   
+                       
+                                </listbox>
+                                    
+                                 
+                            </div>
+                            
+                        </div>
+                    </tabpanel>
+                    
+                    
+                </tabpanels>
+            </tabbox>    
+        </div>
+    </div>
+
+
+</zk>

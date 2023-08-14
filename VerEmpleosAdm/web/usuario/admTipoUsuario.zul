@@ -1,0 +1,17 @@
+<?init class="com.ec.seguridad.Autentificador"?>
+<?link rel="stylesheet" type="text/css" href="/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="/css/style.css"?>
+<div apply="org.zkoss.bind.BindComposer" 
+     viewModel="@id('vm') @init('com.ec.tipousuario.AdmTipoUsuario')" class="col-12 col-sm-12 col-md-12 col-lg-12"  >
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+                    esta es el espacio para el tipo de usuario      
+                    
+            </div>
+                        
+        </div>
+    </div> 
+           
+</div>

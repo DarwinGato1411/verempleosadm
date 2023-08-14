@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<zk   with="100%"  >
+    
+    <style>
+        .z-paging-os span {
+        font-family: arial, sans-serif;
+        font-size: 22px;
+        color: red;
+        font-weight: bold;
+        position: absolute;
+        right: 8px;
+        top: 10px;
+        bottom: 5px;
+        }
+    </style>
+    
+    <div self="@define(content)" apply="org.zkoss.bind.BindComposer">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group container-fluid" align="start"  >
+            <tabbox  width="100%"  tabscroll="true" >
+                <tabs >
+                    <tab label="${labels.app.vacante}" sclass="menutabs"/>
+                </tabs>
+                <tabpanels >
+                    
+                    <tabpanel  height="100%"  >
+    
+                        <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+                             viewModel="@id('vm') @init('com.ec.empresavacante.AdmEmpresaVacante')" class="container-fluid">
+                                   
+                            <div class="container">
+                                <div class="row">
+                                    
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                            <combobox model="@load(vm.listaDatosPais)"  
+                                                      selectedItem="@bind(vm.buscarPais)"                               
+                                                    
+                                          
+                                                      readonly="true">
+                                                <template name="model">
+                                                    <comboitem  label="@bind(each)"
+                                                    />
+                                                </template>                                      
+                                            </combobox>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                          
+                                            <datebox id="FechaInicio" cols="12" value="@bind(vm.fechainicio)"  
+                                                     format="yyyy/MM/dd" onCreate="self.value = new Date()" />
+                                            <!--                                        </div>
+                                            <div class="col-12 col-sm-12 col-md-1 col-lg-1">-->
+                                            <datebox id="FechaFin" cols="12" format="yyyy/MM/dd" value="@bind(vm.fechaFin)" 
+                                                      onCreate="self.value = new Date()" />
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+                                            <button  onClick="@command('listaPostulantesFechas')" 
+                                                     class="btn btn-primary btn-xs mycss-listcell glyphicon glyphicon-search"                                                                                                    
+                                                     tooltiptext="consulta postulantes"/>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                                
+                            
+                                <div class="row"> 
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6" align="start"  >
+                                        Empresas
+                                        <listbox width="99%"  checkmark="true"  
+                                                 model="@load(vm.listaDatosPostulantesModel)" 
+                                                 nonselectableTags=""     
+                                                 onSelect="@command('seleccionarRegistros')"                                        
+                                                 mold="paging" pageSize="30">
+                                                             
+                                            <listhead sizable="false">
+                                                <listheader   width="35px" ></listheader>
+                                                <listheader label="${labels.app.nombreempresa}" sort="auto(nombreempresa)"   width="40%" ></listheader>                                                         
+                                                <listheader label="${labels.app.pais}" sort="auto(pais)" align="center"    width="15%"></listheader>
+                                                <listheader label="Email Empresa" sort="auto(emailempresa)" align="center"    width="35%"></listheader>
+                   
+                                                                                  
+                                            </listhead>
+                   
+                
+                                            <template name="model">
+                                                <listitem  > 
+                                       
+                                                    <listcell  zclass = "" ></listcell>
+                                                
+                                                    <listcell  zclass = "mycss-listcell" >
+<!--                                                        <label sclass="letraLisbox" 
+                                
+                                                                value="@bind(each.idusuario)"  
+                                                                width="100%"/>-->
+                                                        <label sclass="letraLisbox" 
+                                                               value="@bind(each.emailempresa)"  
+                                                               width="100%"/>
+                                          
+                                                    </listcell> 
+                                               
+                    
+                            
+                                                    <!--con uso de choose-->
+                                                    <zk  choose="@bind(each.estadosri)" >
+                                
+                                                        <zk  when="${each.pais == 'Ecuador'}"  >
+                                                            <listcell    zclass = "mycss-listcell"  style="background:#C7FEC1" >
+                                                            
+                                                                <label sclass="letraLisbox" 
+                                
+                                                                       value="@bind(each.pais)"  
+                                                                       width="100%"/>
+                                                            </listcell>
+                                                        </zk>
+                                                        <zk  when="${each.pais == 'México'}"  >
+                                                            <listcell    zclass = "mycss-listcell"  style="background:#E2C1F5" >
+                                                                <label sclass="letraLisbox" 
+                                
+                                                                       value="@bind(each.pais)"  
+                                                                       width="100%"/>
+                                                            </listcell>
+                                                        </zk>
+                                                        <zk  >
+                                                            <listcell    zclass = "mycss-listcell"  style="background:#FCFE74" >
+                                                                <label value="@bind(each.pais)"  width="15%"/>
+                                                            </listcell>
+                                                        </zk>
+                                                    </zk>
+                            
+                                                    <listcell  zclass = "mycss-listcell" >
+                                                   
+                                                        <label sclass="letraLisbox" 
+                                                               value="@bind(each.nombreempresa)"  
+                                                               width="100%"/>
+                                                    
+                                          
+                                                    </listcell>                   
+                                                 
+
+                                                </listitem>
+                                            </template>   
+                       
+                                        </listbox>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 form-group" align="start"  >
+                                        Numero de registros:<label sclass="letraLisbox" 
+                                                               value="@load(vm.numeroRegistros)"  
+                                                               width="100%"/>
+                                    
+                                        <listbox width="99%" checkmark="false"  
+                                                 model="@load(vm.listaDatos2)" 
+                                                 nonselectableTags=""                                             
+                                                 mold="paging" pageSize="15">
+                                                             
+                                            <listhead sizable="false">
+                         
+                                                <listheader label="Puesto"  sort="auto(Puesto)"   width="45%" ></listheader>
+                                                <listheader label="Fecha de Publicacón" sort="auto(fechapublicacion)"     width="25%"></listheader>
+                                                <listheader label="Fecha fin de Publicación" sort="auto(fechafinPublicacion)"     width="25%"></listheader>
+                                                <listheader label="" sort=""     width="5%"></listheader>
+                                                <listheader label="" sort=""     width="5%"></listheader>
+                                                                                  
+                                            </listhead>
+                   
+                
+                                            <template name="model">
+                                                <listitem  > 
+                                       
+                                                    <listcell  zclass = "mycss-listcell" >
+                                                    
+                                                        <label sclass="letraLisbox" 
+                                                               value="@bind(each.puesto)"  
+                                                               tooltiptext="@bind(each.pais)"
+                                                               width="100%"/>
+                                          
+                                                    </listcell>  
+                                               
+                                                    <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm ">
+                                                    
+                                                        <datebox compact="true" 
+                                                                 value="@bind(each.fechapublicacion)" 
+                                                                 buttonVisible="false" lenient="true" 
+                                                                 tooltiptext="Fecha"
+                                                                 readonly="true"
+                                                                 format="medium" width="98%"  />
+                                                    
+
+                                                    </listcell>  
+                                                    <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm ">
+                                                        <datebox compact="true" 
+                                                                 value="@bind(each.fechafinPublicacion)" 
+                                                                 buttonVisible="false" lenient="true" 
+                                                                 tooltiptext="Fecha"
+                                                                 readonly="true"
+                                                                 format="medium" width="98%"  />
+
+                                                    </listcell>  
+                                                    <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm ">
+                                                        <button 
+                                                            class="btn btn-primary btn-xs mycss-listcell glyphicon glyphicon-search"                                                           
+                                                            onClick="@command('abrirPostulante',valor=each)" 
+                                                            tooltiptext="consulta postulantes"/>
+                                                    </listcell>  
+                                                    <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm ">
+                                                        <button 
+                                                            class="btn btn-primary btn-xs mycss-listcell glyphicon glyphicon-edit"                                                           
+                                                            onClick="@command('moficarVacante',valor=each)" 
+                                                            tooltiptext="Modificar postulantes"/>
+                                                    </listcell>  
+                                            
+
+                                                </listitem>
+                                            </template>   
+                       
+                                        </listbox>
+                                    </div>
+            
+            
+                                </div>
+        
+                            </div>
+                        </div>
+                    </tabpanel>
+                    
+                    
+                </tabpanels>
+            </tabbox>    
+        </div>
+    </div>
+
+
+</zk>

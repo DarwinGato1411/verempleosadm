@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window  id="windowEmpresa"  position="center" class=" headwindowscol-12 col-sm-12 col-md-9 col-lg-9 "  closable="true"  
+         sizable="true" 
+         apply="org.zkoss.bind.BindComposer" contentStyle="overflow:auto"
+         viewModel="@id('vm') @init('com.ec.empresavacante.ModalPostulante')">
+    
+    <caption label="${labels.app.Postulante}" style="font-weight:bold" /> 
+    <div  class="container-fluid"  >
+        
+            
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 " align="start"  >
+            <listbox width="99%"
+                     model="@load(vm.listaempresapostulante)" 
+                     nonselectableTags=""                                             
+                     mold="paging" pageSize="20">
+                                                             
+                <listhead sizable="false">
+                    <listheader label="${labels.app.nombre}"  sort="auto(Nombre)"   width="20%" ></listheader>
+                    <listheader label="${labels.app.apellido}"     width="20%" ></listheader>                                        
+                    <listheader label="${labels.app.email}"   width="45%"></listheader>      
+                    <listheader label="Fecha Actualización CV" class="hidden-xs hidden-sm "  width="15%"></listheader>                                                                                 
+                                      
+                </listhead>
+ 
+                <template name="model">
+                    <listitem  > 
+                                       
+                        <listcell  zclass = "mycss-listcell" >
+                            <label sclass="letraLisbox" 
+                           
+                                   value="@bind(each.nombre)"  
+                                   width="100%"/>
+                                          
+                        </listcell>  
+                        <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm">
+                            <label sclass="letraLisbox" 
+                                   value="@bind(each.apellido)"  
+                                   width="100%"/>
+                        </listcell>  
+                                             
+                          
+                        <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm">
+                            <label sclass="letraLisbox" 
+                                   value="@bind(each.email)"  
+                                   width="100%"/>
+                        </listcell>  
+                        <listcell zclass = "mycss-listcell" class="hidden-xs hidden-sm">
+                            <datebox compact="true" 
+                                     value="@bind(each.fechaactualizacioncurriculum)" 
+                                     buttonVisible="false" lenient="true" 
+                                     tooltiptext="Fecha"
+                                     readonly="true"
+                                     format="medium" width="98%"  />
+                        </listcell>  
+                       
+                        
+
+                    </listitem>
+                </template>   
+                       
+            </listbox>
+                                    
+                                 
+        </div>
+   
+    </div>
+    
+                    
+                  
+</window>

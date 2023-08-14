@@ -1,0 +1,53 @@
+<zk>    
+    <?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+    <div class="banner" style="
+    color: white;
+    padding: auto  auto" id="loginWin"  width="100%"
+         apply="com.ec.controlador.LogoutController" >
+        <div class="row" >
+            <div class="col-6col-sm-6 col-md-6 col-lg-6  " align="start"  apply="com.ec.controlador.Menu">
+                <image src="/imagenes/logoVerEmpleos.png" width="15%" id="idBanner"/>
+                     
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 " align="end" style="float: right; " >
+                <!--<div class="col-8 col-sm-8 col-md-8 col-lg-8 "   >-->
+               
+                <label value="Usuario: " 
+                       if="${not sessionScope.userCredential.anonymous}" 
+                       class="labelUsuarioBanner" />
+                
+                
+            
+            
+                <label value="${sessionScope.usuario.nombreUsuario}" 
+                       class="labelUsuarioBanner" 
+                       if="${not sessionScope.userCredential.anonymous}" />
+                 
+                
+                <label value="${sessionScope.usuario.account}" 
+                       class="labelUsuarioBanner" 
+                       if="${not sessionScope.userCredential.anonymous}" />
+                    ( <label value="${sessionScope.usuario.usuarioSistema.idCatEstado.idPais.pais}" 
+                       class="labelUsuarioBanner" 
+                       if="${not sessionScope.userCredential.anonymous}" />)
+              
+                <!--</div>-->               
+                <!--<div  class="col-4 col-sm-4 col-md-4 col-lg-4 grow "  align="end"  >-->
+                <a sclass="logout labelLogout" id="logout" >  
+                    <label  value="Salir " 
+                            if="${not sessionScope.userCredential.anonymous}" 
+                            sclass="labelLogout"/> 
+                    <image src="/iconos/logout-24.png"  />  
+                       
+                </a>
+                
+                <!--</div>-->
+            </div>
+            
+                
+        
+        </div>
+        
+        
+    </div>
+</zk>

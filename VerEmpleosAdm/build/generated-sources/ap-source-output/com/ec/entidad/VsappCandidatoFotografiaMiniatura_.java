@@ -1,0 +1,14 @@
+package com.ec.entidad;
+
+import javax.annotation.Generated;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-08-14T06:04:40")
+@StaticMetamodel(VsappCandidatoFotografiaMiniatura.class)
+public class VsappCandidatoFotografiaMiniatura_ { 
+
+    public static volatile SingularAttribute<VsappCandidatoFotografiaMiniatura, byte[]> fotografiaMiniatura;
+    public static volatile SingularAttribute<VsappCandidatoFotografiaMiniatura, Integer> idUsuario;
+
+}

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window  id="windowUsuario"  position="center" class=" headwindowscol-12 col-sm-12 col-md-4 col-lg-4 "  closable="true"  
+         sizable="true" 
+         apply="org.zkoss.bind.BindComposer" contentStyle="overflow:auto"
+         viewModel="@id('vm') @init('com.ec.usuario.ModalUsuario')">
+    
+    <caption label="${labels.app.usuario}" style="font-weight:bold" /> 
+    <div  class="container-fluid"  >
+        <div  class="row" >         
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                 <div class="col-12 col-sm-12 col-md-6 col-lg-16  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Pais:
+                
+                    <combobox  model="@load(vm.listaPais)"  
+                               selectedItem="@bind(vm.catPaisSelected)"                               
+                               class="form-control" 
+                               onSelect="@command('buscarProvincia')"
+                               readonly="true" >
+                        <template name="model">
+                            <comboitem  label="@bind(each.pais)"/>
+                        </template>                                      
+                    </combobox>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Provincia:
+                
+                    <combobox id="idProvincia"
+                              model="@load(vm.listaProvincia)"  
+                              selectedItem="@bind(vm.catEstadoSelected)" 
+                              class="form-control"
+                              readonly="true" >
+                        <template name="model">
+                            <comboitem  label="@bind(each.estado)"/>
+                        </template>                                      
+                    </combobox>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                 <label value="(*) " style="color:red;font-weight:bold"/>Tipo Usuario
+                    <combobox  model="@load(vm.listaDatos)"  
+                              selectedItem="@bind(vm.tipoUsuarioselect)" 
+                              style="width:150px"  
+                              readonly="true" >
+                        <template name="model">
+                            <comboitem  label="@bind(each.tipuDescripcion)"/>
+                        </template>                                      
+                    </combobox>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Correo:
+                
+                    <textbox  maxlength="50"                              
+                              value="@bind(vm.usuario.email)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Contraseña:
+                
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.usuario.contrasenia)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    <label value="(*) " style="color:red;font-weight:bold"/>Activa modulo adm
+                    <checkbox class="badge badge-default   btn-secondary  textoFechaDateBox " 
+                                                                              
+                              checked="@bind(vm.usuario.modAdministrativo)">
+                   
+                    </checkbox>
+                    
+                </div>
+                
+                
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group" align="center" >
+                    <button  label="${labels.app.guardar}" 
+                             sclass=" glyphicon glyphicon-floppy-disk btn btn btn-primary btn-xs"
+                             onClick="@command('guardar')"
+                             tooltiptext="${labels.app.guardar}"/>
+ 
+
+                </div> 
+            </div>
+   
+        </div>
+    </div>
+    
+                    
+                  
+</window>

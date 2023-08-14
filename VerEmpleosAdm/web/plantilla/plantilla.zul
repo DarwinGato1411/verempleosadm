@@ -1,0 +1,16 @@
+<?init class="com.ec.seguridad.Autentificador"?>
+
+<zk>
+    <borderlayout  >
+        <north   border="none" height="50px" >
+            <include src="/plantilla/banner.zul"/>
+        </north>
+        <west  border="none" class="banner" autoscroll="true"  
+              collapsible="true" splittable="true"  >
+             <include src="/plantilla/menuOpciones.zul"/>
+        </west>
+        <center  id="mainContentAsesor" autoscroll="true" self="@{insert(content)}">
+            
+        </center>
+    </borderlayout>
+</zk>
